@@ -2,6 +2,8 @@
 
 A lightweight, dead simple, and extremely flexible lightbox generator without the pain.
 
+http://github.com/nuxy/YALB/raw/master/preview.jpg
+
 == Features
 
 - Extensible HTML/CSS interface.
