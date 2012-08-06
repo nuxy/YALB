@@ -1,0 +1,20 @@
+= YALB (Yet Another Lightbox)
+
+A lightweight, dead simple, and extremely flexible lightbox generator without the pain.
+
+== Features
+
+- Extensible HTML/CSS interface.
+- Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.
+- Compatible with iOS and Android mobile web browsers.
+- Easy to set-up and customize.
+- Supports HTML, Flash objects and image content.
+- Fast and lightweight (jQuery plug-in *only 2.3 kB)
+
+== Installation
+
+Download the latest {sources}[https://github.com/nuxy/YALB/downloads] and refer to the {README}[http://labs.mbrooks.info/demos/YALB/README.html] for more information about this package.
+
+== Author
+
+{Marc S. Brooks}[https://github.com/nuxy]
