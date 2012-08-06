@@ -1,6 +1,6 @@
 = YALB (Yet Another Lightbox)
 
-A lightweight, dead simple, and extremely flexible lightbox generator without the pain.
+A lightweight, dead simple, and extremely flexible lightbox generator.
 
 http://github.com/nuxy/YALB/raw/master/preview.jpg
 
