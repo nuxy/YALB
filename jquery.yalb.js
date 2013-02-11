@@ -2,7 +2,7 @@
  *  YALB (Yet Another Lightbox)
  *  A lightweight, dead simple, and extremely flexible lightbox generator
  *
- *  Copyright 2011-2012, Marc S. Brooks (http://mbrooks.info)
+ *  Copyright 2011-2013, Marc S. Brooks (http://mbrooks.info)
  *  Licensed under the MIT license:
  *  http://www.opensource.org/licenses/mit-license.php
  *
@@ -12,7 +12,7 @@
 
 (function($) {
 	var methods = {
-		init : function(options) {
+		"init" : function(options) {
 
 			// default options
 			var settings = $.extend({
@@ -50,13 +50,13 @@
 			}
 		},
 
-		destroy : function() {
+		"destroy" : function() {
 			return this.each(function() {
 				$(this).removeData();
 			});
 		},
 
-		view : function() {
+		"view" : function() {
 			return this.each(function() {
 				var $this = $(this),
 					data  = $this.data();
@@ -86,7 +86,7 @@
 			});
 		},
 
-		hide : function() {
+		"hide" : function() {
 			return this.each(function() {
 				var $this = $(this),
 					data  = $this.data();
@@ -118,10 +118,10 @@
 
 	$.fn.YALB = function(method) {
 		if (methods[method]) {
-			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1) );
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
 		}
 		else
-		if (typeof method === 'object' || ! method) {
+		if (typeof method === 'object' || !method) {
 			return methods.init.apply(this, arguments);
 		}
 		else {
@@ -168,8 +168,8 @@
 	 * Set window properties based on the browser window size
 	 */
 	function setWindowProps(node) {
-		var posX = getBrowserCenterX() - (node.outerWidth()  / 2);
-		var posY = getBrowserCenterY() - (node.outerHeight() / 2);
+		var posX = getBrowserCenterX() - (node.outerWidth()  / 2),
+			posY = getBrowserCenterY() - (node.outerHeight() / 2);
 
 		node.css({
 			position : 'absolute',
