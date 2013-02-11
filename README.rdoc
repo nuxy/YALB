@@ -15,7 +15,7 @@ http://github.com/nuxy/YALB/raw/master/preview.jpg
 
 == Installation
 
-Download the latest {sources}[https://github.com/nuxy/YALB/downloads] and refer to the {README}[http://labs.mbrooks.info/demos/YALB/README.html] for more information about this package.
+Download the latest {sources}[https://github.com/nuxy/YALB/tags] and refer to the {README}[http://labs.mbrooks.info/demos/YALB/README.html] for more information about this package.
 
 == Author
 
