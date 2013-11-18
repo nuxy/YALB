@@ -62,7 +62,7 @@
 					data  = $this.data();
 
 				data.lightbox
-					.fadeTo( (data.options.viewSpeed + 500), 1, data.options.viewEasing,
+					.fadeTo(data.options.viewSpeed, 1, data.options.viewEasing,
 						function() {
 							$(this).css('cursor','pointer');
 						}
