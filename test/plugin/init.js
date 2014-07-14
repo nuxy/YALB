@@ -1,10 +1,8 @@
 module('YALB (Yet Another Lightbox)', {
 	setup : function() {
-		var win = $('#content').YALB();
+		$('#qunit-fixture').text('Hello World');
 
-		// bind mouse event
-		win.YALB('show');
-		});
+		win = $('#qunit-fixture').YALB();
 	},
 	teardown : function() {
 		// do nothing - preserve element structure
@@ -12,5 +10,5 @@ module('YALB (Yet Another Lightbox)', {
 });
 
 test('Generate HTML', function() {
-	ok('Lightbox elements created');
+	ok(win, 'Lightbox elements created');
 });
