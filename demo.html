@@ -53,13 +53,14 @@
 				win.YALB('hide');
 			});
 
-		// view login window
-		win.YALB('show');
-
 		// bind window open events
-		$('#trigger').on('click', function() {
-			win.YALB('show');
-		});
+		var button = $('#trigger')
+			.on('click', function() {
+				win.YALB('show');
+			});
+
+		// view window
+		button.click();
 	});
 	</script>
 

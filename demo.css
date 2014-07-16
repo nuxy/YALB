@@ -2,7 +2,6 @@
 
 #login {
 	background-color: #FFFFFF;
-	font-family: Arial;
 	padding: 20px 15px 25px 15px;
 	position: relative;
 	width: 240px;
@@ -24,14 +23,11 @@
 #login input[type=text],
 #login input[type=password] {
 	font-size: 16px;
-	line-height: 24px;
 	padding: 5px;
 	width: 150px;
 }
 
 #login input[type=submit] {
-	display: block;
-	margin: 0px auto 0px auto;
 	width: 80px;
 }
 
@@ -40,17 +36,14 @@
 	padding-bottom: 0px;
 }
 
-#login p {
-	margin-bottom: 0px;
-}
-
 #login p.error_mesg {
 	background-color: #FFFFFF;
 	border: 1px solid #DDDDDD;
 	color: #787878;
+	display: inline;
 	font-size: 12px;
 	left: 220px;
-	margin: -37px 0px 0px 0px;
+	margin-top: -4px;
 	position: absolute;
 	width: 150px;
 }
