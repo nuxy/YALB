@@ -1,4 +1,4 @@
-= YALB (Yet Another Lightbox)
+= YALB (Yet Another Lightbox) {<img src="https://travis-ci.org/nuxy/YALB.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/nuxy/YALB]
 
 A lightweight, dead simple, and extremely flexible lightbox generator.
 
