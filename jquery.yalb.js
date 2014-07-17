@@ -1,8 +1,8 @@
-/*
+/**
  *  YALB (Yet Another Lightbox)
  *  A lightweight, dead simple, and extremely flexible lightbox generator
  *
- *  Copyright 2011-2013, Marc S. Brooks (http://mbrooks.info)
+ *  Copyright 2011-2014, Marc S. Brooks (http://mbrooks.info)
  *  Licensed under the MIT license:
  *  http://www.opensource.org/licenses/mit-license.php
  *
@@ -17,10 +17,10 @@
 			// default options
 			var settings = $.extend({
 				maskColor  : '#000000',
-				viewEasing : 'linear',
+				showEasing : 'linear',
 				hideEasing : 'linear',
 				hideSpeed  : 250,
-				viewSpeed  : 500
+				showSpeed  : 500
 			}, options);
 
 			return this.each(function() {
@@ -34,13 +34,15 @@
 				});
 
 				if ( $.isEmptyObject(data) ) {
-					var main = createWindow($this, settings);
+					var win = createWindow($this, settings);
 
 					$this.data({
-						lightbox : main.children('.yalb_lightbox'),
-						mask     : main.children('.yalb_mask'),
-						options  : settings
+						modal   : win.children('div.modal'),
+						mask    : win.children('div.mask'),
+						options : settings
 					});
+
+					$('body').append(win);
 				}
 			});
 
@@ -56,62 +58,65 @@
 			});
 		},
 
-		"view" : function() {
+		"show" : function(callback) {
 			return this.each(function() {
 				var $this = $(this),
 					data  = $this.data();
 
-				data.lightbox
-					.fadeTo(data.options.viewSpeed, 1, data.options.viewEasing,
+				var attr = { cursor : 'pointer' };
+
+				data.modal
+					.fadeTo(data.options.showSpeed, 1, data.options.showEasing,
 						function() {
-							$(this).css('cursor','pointer');
+							$(this).css(attr);
 						}
 					);
 
-				setWindowProps(data.lightbox);
+				setWindowProps(data.modal);
 
 				data.mask
-					.fadeTo(data.options.viewSpeed, 0.40, data.options.viewEasing,
+					.fadeTo(data.options.showSpeed, 0.40, data.options.showEasing,
 						function() {
-							$(this).css('cursor','pointer');
+							$(this).css(attr);
+
+							if (typeof callback === 'function') {
+								callback($(this));
+							}
 						}
 					);
 
 				setMaskProps(data.mask);
-
-				// bind mouse event to hide window
-				data.mask.click(function() {
-					$this.YALB('hide');
-				});
 			});
 		},
 
-		"hide" : function() {
+		"hide" : function(callback) {
 			return this.each(function() {
 				var $this = $(this),
 					data  = $this.data();
 
-				data.lightbox
+				var attr = {
+					cursor  : 'auto',
+					display : 'none',
+					zIndex  : 0
+				};
+
+				data.modal
 					.fadeTo(data.options.hideSpeed, 0, data.options.hideEasing,
 						function() {
-							$(this).css({
-								cursor  : 'auto',
-								display : 'none',
-								zIndex  : 0
-							});
+							$(this).css(attr);
 						}
 					);
 
 				data.mask
 					.fadeTo(data.options.hideSpeed, 0, data.options.hideEasing,
 						function() {
-							$(this).css({
-								cursor  : 'auto',
-								display : 'none',
-								zIndex  : 0
-							});
+							$(this).css(attr);
+
+							if (typeof callback === 'function') {
+								callback($(this));
+							}
 						}
-				);
+					);
 			});
 		}
 	};
@@ -125,17 +130,19 @@
 			return methods.init.apply(this, arguments);
 		}
 		else {
-			$.error('Method ' +  method + ' does not exist on jQuery.YALB');
+			$.error('Method ' +  method + ' does not exist in jQuery.YALB');
 		}
 	};
 
-	/*
+	/**
 	 * Create lighbox elements
+	 * @param Object node
+	 * @param Object options
 	 */
 	function createWindow(node, options) {
 		var modal
 			= $('<div></div>')
-				.addClass('yalb_lightbox')
+				.addClass('modal')
 				.css({
 					backgroundColor : 'transparent',
 					display         : 'none',
@@ -147,7 +154,7 @@
 
 		var mask
 			= $('<div></div>')
-				.addClass('yalb_mask')
+				.addClass('mask')
 				.css({
 					backgroundColor : options.maskColor,
 					display         : 'none',
@@ -156,16 +163,14 @@
 					opacity         : 0
 				});
 
-		var main = $('<div></div>')
+		return $('<div></div>')
+			.addClass('yalb')
 			.append(modal, mask);
-
-		$('body').append(main);
-
-		return main;
 	}
 
-	/*
+	/**
 	 * Set window properties based on the browser window size
+	 * @param Object node
 	 */
 	function setWindowProps(node) {
 		var posX = getBrowserCenterX() - (node.outerWidth()  / 2),
@@ -182,8 +187,9 @@
 		window.onresize = function() { setWindowProps(node) };
 	}
 
-	/*
+	/**
 	 * Set mask properties based on the browser window size
+	 * @param Object node
 	 */
 	function setMaskProps(node) {
 		node.css({
@@ -195,22 +201,25 @@
 		});
 	}
 
-	/*
+	/**
 	 * Return the web browser inner center X position
+	 * @returns Number
 	 */
 	function getBrowserCenterX() {
 		return $(window).outerWidth() / 2;
 	}
 
-	/*
+	/**
 	 * Return the web browser inner center Y position
+	 * @returns Number
 	 */
 	function getBrowserCenterY() {
 		return $(window).outerHeight() / 2;
 	}
 
-	/*
+	/**
 	 * Return the scrollable window document height
+	 * @returns Number
 	 */
 	function getDocHeight() {
 		return Math.max(

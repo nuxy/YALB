@@ -7,9 +7,11 @@
 </head>
 <body>
 
-<h1>YALB (Yet Another Lightbox)</h1>
+<h1>YALB <small>(Yet Another Lightbox)</small></h1>
 
 <p>A lightweight, dead simple, and extremely flexible lightbox generator.</p>
+
+<img class="preview" src="preview.jpg">
 
 <h2>Features</h2>
 
@@ -55,11 +57,9 @@
 
 <p>Add the following Javascript between the <code>&lt;head&gt;&lt;/head&gt;</code> tags of your HTML document.</p>
 
-<pre>
-&lt;script src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
-&lt;script&gt;
-	google.load('jquery','1.7.1');
-&lt;/script&gt;
+<h4>Use Example 1 - Basic lightbox usage</h4>
+
+<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;
 
 &lt;script src="/path/to/yalb.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
@@ -67,16 +67,66 @@ $(document).ready(function() {
 	var content = $('#content').YALB();
 
 	$('#trigger').click(function() {
-		content.YALB('view');
+		content.YALB('show');
 	});
 });
-&lt;/script&gt;</pre>
+&lt;/script&gt;
 
-<p>Adding content to the modal window is as easy as creating an HTML container.</p>
+..
 
-<pre>&lt;div id="#content"&gt;
+&lt;div id="content"&gt;
 	Hello World
 &lt;/div&gt;</pre>
+
+<h4>Use Example 2 - Generate HTML form using the <a href="https://github.com/nuxy/Webform-Toolkit">Webform-Toolkit</a> and view as a lightbox</h4>
+
+<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;
+
+&lt;script src="/path/to/webform.toolkit.min.js"&gt;&lt;/script&gt;
+&lt;script src="/path/to/yalb.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready(function() {
+
+	// generate interactive webform
+	$('#content').WebformToolkit({
+		id   : 'login',
+		action : 'http://www.domain.com/handler',
+		fields : [
+			{
+				"label"       : "User Name",
+				"type"        : "text",
+				"name"        : "username",
+				"value"       : "",
+				"maxlength"   : "15",
+				"filter"      : "^\\w{0,15}$",
+				"description" : "",
+				"error"       : "Supported characters: A-Z, 0-9 and underscore",
+				"required"    : "1"
+			},
+			{
+				"label"       : "Password",
+				"type"        : "password",
+				"name"        : "password",
+				"value"       : "",
+				"maxlength"   : "15",
+				"filter"      : "^(?!password)(.{0,15})$",
+				"description" : "",
+				"error"       : "The password entered is not valid",
+				"required"    : "1"
+			}
+		]
+	});
+
+	// define lightbox properties
+	var win = $('#login').YALB({ showSpeed : 200 });
+
+	// view login window
+	win.YALB('show');
+&lt;/script&gt;
+
+..
+
+&lt;div id="content"&gt;&lt;/div&gt;</pre>
 
 <a name="options"></a>
 
@@ -101,7 +151,7 @@ $(document).ready(function() {
 		<td>linear</td>
 	</tr>
 	<tr>
-		<td>viewEasing</td>
+		<td>showEasing</td>
 		<td>animation to be used when viewing the lightbox</td>
 		<td>linear</td>
 	</tr>
@@ -111,17 +161,25 @@ $(document).ready(function() {
 		<td>250</td>
 	</tr>
 	<tr>
-		<td>viewSpeed</td>
+		<td>showSpeed</td>
 		<td>speed of the view animation in milliseconds</td>
 		<td>500</td>
 	</tr>
 </table>
 
-<p>Click <a href="http://jqueryui.com/demos/effect/easing.html">here</a> for more information about the available jQuery UI Easing effects.</p>
+<p>Click <a href="http://jqueryui.com/easing">here</a> for more information about the available <a href="http://jqueryui.com">jQuery UI</a> Easing effects.</p>
+
+<h2>jQuery Support</h2>
+
+<p>In order to support older web browsers, specifically Internet Explorer 7, this package requires <a href="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">jQuery 1.8.3</a>.  Furthermore, jQuery has recently dropped support for IE8 in version 2, so if there is no compelling reason to support these two web browsers, it is recommended that you upgrade to the latest version of jQuery.  If you still need to support IE8 please upgrade to <a href="http://blog.jquery.com/2012/06/28/jquery-core-version-1-9-and-beyond/">jQuery 1.9+</a>.</p>
+
+<h2>Functional Testing</h2>
+
+<p>This package has been preconfigured to support <a href="http://qunitjs.com">QUnit</a> headless testing using <a href="http://www.travis-ci.org">Travis-CI</a>.  If you plan on using another integration tool you will have to create a custom project that combines the use of <em>QUnit</em> and <a href="http://www.phantomjs.org">PhantomJS</a> plugins.  You can manually run these tests in your web browser by clicking <a href="test.html">here</a>.</p>
 
 <h2>Releases</h2>
 
-<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (2.3 kB) and developers version (unpacked 4.8 kB)</p>
+<p>I have included with this package a <a href="http://dean.edwards.name/packer">packed</a> version (2.3 kB) and developers version (unpacked 4.9 kB)</p>
 
 <p>You can always find the latest updates within this projects repository.</p>
 
@@ -141,7 +199,7 @@ $(document).ready(function() {
 
 <p>YALB is provided under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
 
-<p>YALB &#169;2011-2013 <a href="http://mbrooks.info">Marc S. Brooks</a></p>
+<p>YALB &#169;2011-2014 <a href="http://mbrooks.info">Marc S. Brooks</a></p>
 
 </body>
 </html>

@@ -1,27 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="http://www.google.com/jsapi"></script>
-	<script>
-		google.load('jquery','1.7.1');
-	</script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 
-	<!-- Javascript insert start -->
+	<!-- JavaScript insert start -->
 
+	<script src="http://labs.mbrooks.info/demos/Webform-Toolkit/jquery.webform.toolkit.min.js"></script>	
 	<script src="jquery.yalb.min.js"></script>
 	<script>
 	$(document).ready(function() {
-		var content = $('#content').YALB();
-
-		// bind mouse event
-		$('#trigger').click(function() {
-			content.YALB('view');
+		$('#content').WebformToolkit({
+			id     : 'login',
+			action : 'http://www.domain.com/handler',
+			fields : [
+				{
+					"label"       : "User Name",
+					"type"        : "text",
+					"name"        : "username",
+					"value"       : "",
+					"maxlength"   : "15",
+					"filter"      : "^\\w{0,15}$",
+					"description" : "",
+					"error"       : "Supported characters: A-Z, 0-9 and underscore",
+					"required"    : "1"
+				},
+				{
+					"label"       : "Password",
+					"type"        : "password",
+					"name"        : "password",
+					"value"       : "",
+					"maxlength"   : "15",
+					"filter"      : "^(?!password)(.{0,15})$",
+					"description" : "",
+					"error"       : "The password entered is not valid",
+					"required"    : "1"
+				}
+			]
+		},
+		function() {
+			alert('The submit event is disabled for this demo');
 		});
+
+		// define lightbox properties
+		var win = $('#login').YALB({
+			viewSpeed : 200
+		});
+
+		// bind window closing events
+		var mask = win.data('mask')
+			.on('click', function() {
+				win.YALB('hide');
+			});
+
+		// bind window open events
+		var button = $('#trigger')
+			.on('click', function() {
+				win.YALB('show');
+			});
+
+		// view window
+		button.click();
 	});
 	</script>
 
-	<!-- Javascript insert end -->
+	<!-- JavaScript insert end -->
+
+
+	<!-- CSS include start -->
+
+	<link rel="stylesheet" type="text/css" href="http://labs.mbrooks.info/demos/Webform-Toolkit/jquery.webform.toolkit.min.css">
+
+	<!-- CSS include end -->
 
 
 	<!-- CSS overrides start -->
@@ -37,45 +87,24 @@
 <body>
 
 <p id="about">
-	This <strong>jQuery</strong> plugin is <a href="jquery.yalb.min.js" title="Only 2.3 kb">lightweight</a>, easy to <a href="README.html#install" title="Installation">install</a> / <a href="demo.css" title="Stylesheet">customize</a>, and works on all modern web browsers.
+	This <strong>jQuery</strong> plugin is <a href="jquery.yalb.min.js" title="Only 2.3 kB">lightweight</a>, easy to <a href="README.html#install" title="Installation">install</a> / <a href="demo.css" title="Stylesheet">customize</a>, and works on all modern web browsers.
 </p>
 
 
 <!-- HTML example start -->
 
-<form id="content" class="round shadow">
-	<fieldset class="round">
-		<legend>Member Login</legend>
-
-		<label>
-			User Name
-		</label>
-
-		<div>
-			<input type="text" autofocus>
-		</div>
-
-		<label>
-			Password
-		</label>
-
-		<div>
-			<input type="password">
-		</div>
-	</fieldset>
-
-	<input type="submit" value="Submit">
-</form>
-
-<button id="trigger" type="button">Open Window</button>
+<div id="content"></div>
 
 <!-- HTML example end -->
+
+
+<button id="trigger">Test Me</button>
 
 
 <!-- footer start -->
 
 <div id="footer">
-	<span class="copy">&#169; 2011-2013 <a href="http://mbrooks.info">Marc S. Brooks</a></span>
+	<span class="copy">&#169; 2011-2014 <a href="http://mbrooks.info">Marc S. Brooks</a></span>
 </div>
 
 <!-- footer end -->

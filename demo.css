@@ -1,62 +1,63 @@
 /* example */
 
-button#trigger {
-	bottom: 25px;
-	left: 20px;
-	position: absolute;
-	width: 100px;
-	white-space: nowrap;
-	z-index: 100;
-}
-
-#content {
+#login {
 	background-color: #FFFFFF;
-	font-family: Arial;
-	height: 205px;
-	padding: 10px 15px 15px 15px;
-	width: 220px;
+	padding: 20px 15px 25px 15px;
+	position: relative;
+	width: 240px;
 }
 
-#content fieldset {
-	background-color: #F7F7F7;
-	border: 1px solid #DDDDDD;
-	height: 160px;
+#login fieldset {
 	padding-left: 25px;
 }
 
-#content label {
+#login label {
 	display: block;
-	margin: 12px 0px 3px 0px;
+	margin: 5px 0px 12px 0px;
 }
 
-#content legend {
-	background-color: #FFFFFF;
-	border-bottom: 1px solid #DDDDDD;
-	color: #787878;
-	font-weight: bold;
+#login label span {
+	display: none;
 }
 
-#content input[type=text],
-#content input[type=password] {
-	padding: 4px;
+#login input[type=text],
+#login input[type=password] {
+	font-size: 16px;
+	padding: 5px;
 	width: 150px;
 }
 
-#content input[type=submit] {
-	display: block;
-	margin: 20px auto 0px auto;
+#login input[type=submit] {
 	width: 80px;
 }
 
+#login div.form_submit {
+	margin-top: 10px;
+	padding-bottom: 0px;
+}
+
+#login p.error_mesg {
+	background-color: #FFFFFF;
+	border: 1px solid #DDDDDD;
+	color: #787878;
+	display: inline;
+	font-size: 12px;
+	left: 220px;
+	margin-top: -4px;
+	position: absolute;
+	width: 150px;
+}
+
+#trigger {
+	display: block;
+	margin: 25% auto 0px auto;
+}
 
 /* CSS3 supported effects */
 
-.round {
+#login {
 	border-radius: 15px;
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
-}
-
-.shadow {
 	box-shadow: 0px 0px 20px #212121;
 }
