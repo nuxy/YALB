@@ -1,0 +1,19 @@
+{
+  "name": "yalb",
+  "version": "1.8.0",
+  "homepage": "https://github.com/nuxy/YALB",
+  "description": "A lightweight, dead simple, and extremely flexible lightbox generator",
+  "main": "jquery.yalb.js",
+  "keywords": [
+    "javascript",
+    "jquery",
+    "library"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "*.rdoc",
+    "Rakefile",
+    "test"
+  ]
+}

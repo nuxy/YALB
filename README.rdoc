@@ -15,7 +15,11 @@ http://github.com/nuxy/YALB/raw/master/preview.jpg
 
 == Installation
 
-Download the latest {sources}[https://github.com/nuxy/YALB/tags] and refer to the {README}[http://labs.mbrooks.info/demos/YALB/README.html] for more information about this package.
+This package can be easily installed using Bower.
+
+    $ bower install yalb
+
+Please refer to the {README}[https://labs.mbrooks.info/demos/YALB/README.html] for more information about this package.
 
 == Author
 
