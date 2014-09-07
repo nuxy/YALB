@@ -11,7 +11,7 @@ http://github.com/nuxy/YALB/raw/master/preview.jpg
 - Compatible with iOS and Android mobile web browsers.
 - Easy to set-up and customize.
 - Supports HTML, Flash objects, and image content.
-- Fast and lightweight (jQuery plug-in *only 2.4 kB)
+- Fast and lightweight (jQuery plug-in *only 2.6 kB)
 
 == Installation
 
