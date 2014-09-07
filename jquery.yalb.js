@@ -10,6 +10,10 @@
  *    jquery.js
  */
 
+if (!window.jQuery || (window.jQuery && window.jQuery.fn.jquery < '1.8.3')) {
+	alert('YALB requires jQuery 1.8.3 or greater.');
+}
+
 (function($) {
 	var methods = {
 		"init" : function(options) {
@@ -79,7 +83,7 @@
 						function() {
 							$(this).css(attr);
 
-							if (typeof callback === 'function') {
+							if ( $.isFunction(callback) ) {
 								callback($(this));
 							}
 						}
@@ -112,7 +116,7 @@
 						function() {
 							$(this).css(attr);
 
-							if (typeof callback === 'function') {
+							if ( $.isFunction(callback) ) {
 								callback($(this));
 							}
 						}
