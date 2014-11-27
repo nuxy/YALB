@@ -3,7 +3,7 @@
   "version": "1.3.1",
   "homepage": "https://github.com/nuxy/YALB",
   "description": "A lightweight, dead simple, and extremely flexible lightbox generator",
-  "main": "jquery.yalb.js",
+  "main": "yalb.js",
   "keywords": [
     "javascript",
     "jquery",
