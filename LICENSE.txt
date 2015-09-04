@@ -1,7 +1,7 @@
 YALB (Yet Another Lightbox)
-A lightweight, dead simple, and extremely flexible lightbox generator
+A lightweight, dead simple, and extremely flexible lightbox generator.
 
-Copyright 2011-2014, Marc S. Brooks (http://mbrooks.info)
+Copyright 2011-2015, Marc S. Brooks (http://mbrooks.info)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
