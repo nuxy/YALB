@@ -32,12 +32,12 @@
   width: 80px;
 }
 
-#login div.form_submit {
+#login .form_submit {
   margin-top: 10px;
   padding-bottom: 0px;
 }
 
-#login p.error_mesg {
+#login .error_mesg {
   background-color: #FFFFFF;
   border: 1px solid #DDDDDD;
   color: #787878;
