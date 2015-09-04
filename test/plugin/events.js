@@ -1,23 +1,23 @@
 test('Show Window', function() {
-	stop();
+  stop();
 
-	ok(true, "Test method 'show'");
+  ok(true, "Test method 'show'");
 
-	win.YALB('show', function() {
-		ok($('div.modal').is(':visible'), 'Lightbox is visible');
+  win.YALB('show', function() {
+    ok($('div.modal').is(':visible'), 'Lightbox is visible');
 
-		start();
-	});
+    start();
+  });
 });
 
 test('Hide Window', function() {
-	stop();
+  stop();
 
-	ok(true, "Test method 'hide'");
+  ok(true, "Test method 'hide'");
 
-	win.YALB('hide', function() {
-		ok($('div.modal').is(':hidden'), 'Lightbox is hidden');
+  win.YALB('hide', function() {
+    ok($('div.modal').is(':hidden'), 'Lightbox is hidden');
 
-		start();
-	});
+    start();
+  });
 });

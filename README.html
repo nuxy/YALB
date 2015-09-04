@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="http://mbrooks.info/readme.css">
+  <link rel="stylesheet" type="text/css" href="http://mbrooks.info/readme.css">
 
-	<title>README</title>
+  <title>README</title>
 </head>
 <body>
 
@@ -16,12 +16,12 @@
 <h2>Features</h2>
 
 <ul>
-	<li>Extensible HTML/CSS interface.</li>
-	<li>Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.</li>
-	<li>Compatible with iOS and Android mobile web browsers.</li>
-	<li>Easy to set-up and customize.</li>
-	<li>Supports HTML, Flash objects, and image content.</li>
-	<li>Fast and lightweight (jQuery plug-in *only 2.6 kB)</li>
+  <li>Extensible HTML/CSS interface.</li>
+  <li>Compatible with Firefox 3.6+, Chrome, Safari 5+, Opera, and Internet Explorer 7+ web browsers.</li>
+  <li>Compatible with iOS and Android mobile web browsers.</li>
+  <li>Easy to set-up and customize.</li>
+  <li>Supports HTML, Flash objects, and image content.</li>
+  <li>Fast and lightweight (jQuery plug-in *only 2.6 kB)</li>
 </ul>
 
 <p>Check out the <a href="demo.html">demo</a> provided with this package.</p>
@@ -31,20 +31,20 @@
 <h2>Installation</h2>
 
 <ol>
-	<li>Download the latest <a href="https://github.com/nuxy/YALB/tags">sources</a> to your computer using a web browser.</li>
-	<li>Extract the contents of the <em>.zip</em> into a folder on your local computer.</li>
-	<li>Upload the folder with the <strong>following files</strong> to your web site.</li>
+  <li>Download the latest <a href="https://github.com/nuxy/YALB/tags">sources</a> to your computer using a web browser.</li>
+  <li>Extract the contents of the <em>.zip</em> into a folder on your local computer.</li>
+  <li>Upload the folder with the <strong>following files</strong> to your web site.</li>
 </ol>
 
 <table border="1">
-	<tr>
-		<th>Filename</th>
-		<th>Role</th>
-	</tr>
-	<tr>
-		<td>yalb.min.js</td>
-		<td>The main script to be included from within your HTML document.</td>
-	</tr>
+  <tr>
+    <th>Filename</th>
+    <th>Role</th>
+  </tr>
+  <tr>
+    <td>yalb.min.js</td>
+    <td>The main script to be included from within your HTML document.</td>
+  </tr>
 </table>
 
 <h2>Set-up</h2>
@@ -64,18 +64,18 @@
 &lt;script src="/path/to/yalb.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(document).ready(function() {
-	var content = $('#content').YALB();
+  var content = $('#content').YALB();
 
-	$('#trigger').click(function() {
-		content.YALB('show');
-	});
+  $('#trigger').click(function() {
+    content.YALB('show');
+  });
 });
 &lt;/script&gt;
 
 ..
 
 &lt;div id="content"&gt;
-	Hello World
+  Hello World
 &lt;/div&gt;</pre>
 
 <h4>Use Example 2 - Generate HTML form using the <a href="https://github.com/nuxy/Webform-Toolkit">Webform-Toolkit</a> and view as a lightbox</h4>
@@ -87,41 +87,41 @@ $(document).ready(function() {
 &lt;script&gt;
 $(document).ready(function() {
 
-	// generate interactive webform
-	$('#content').WebformToolkit({
-		id   : 'login',
-		action : 'http://www.domain.com/handler',
-		fields : [
-			{
-				"label"       : "User Name",
-				"type"        : "text",
-				"name"        : "username",
-				"value"       : "",
-				"maxlength"   : "15",
-				"filter"      : "^\\w{0,15}$",
-				"description" : "",
-				"error"       : "Supported characters: A-Z, 0-9 and underscore",
-				"required"    : "1"
-			},
-			{
-				"label"       : "Password",
-				"type"        : "password",
-				"name"        : "password",
-				"value"       : "",
-				"maxlength"   : "15",
-				"filter"      : "^(?!password)(.{0,15})$",
-				"description" : "",
-				"error"       : "The password entered is not valid",
-				"required"    : "1"
-			}
-		]
-	});
+  // generate interactive webform
+  $('#content').WebformToolkit({
+    id   : 'login',
+    action : 'http://www.domain.com/handler',
+    fields : [
+      {
+        "label"       : "User Name",
+        "type"        : "text",
+        "name"        : "username",
+        "value"       : "",
+        "maxlength"   : "15",
+        "filter"      : "^\\w{0,15}$",
+        "description" : "",
+        "error"       : "Supported characters: A-Z, 0-9 and underscore",
+        "required"    : "1"
+      },
+      {
+        "label"       : "Password",
+        "type"        : "password",
+        "name"        : "password",
+        "value"       : "",
+        "maxlength"   : "15",
+        "filter"      : "^(?!password)(.{0,15})$",
+        "description" : "",
+        "error"       : "The password entered is not valid",
+        "required"    : "1"
+      }
+    ]
+  });
 
-	// define lightbox properties
-	var win = $('#login').YALB({ showSpeed : 200 });
+  // define lightbox properties
+  var win = $('#login').YALB({ showSpeed : 200 });
 
-	// view login window
-	win.YALB('show');
+  // view login window
+  win.YALB('show');
 &lt;/script&gt;
 
 ..
@@ -135,36 +135,36 @@ $(document).ready(function() {
 <p>The following options can be passed to the plug-in main function as JSON</p>
 
 <table border="1">
-	<tr>
-		<th>Option</th>
-		<th>Description</th>
-		<th>Default Value</th>
-	</tr>
-	<tr>
-		<td>maskColor</td>
-		<td>color of the window mask using hexadecimal notation</td>
-		<td>#000000</td>
-	</tr>
-	<tr>
-		<td>hideEasing</td>
-		<td>animation to be used when hiding the lightbox</td>
-		<td>linear</td>
-	</tr>
-	<tr>
-		<td>showEasing</td>
-		<td>animation to be used when viewing the lightbox</td>
-		<td>linear</td>
-	</tr>
-	<tr>
-		<td>hideSpeed</td>
-		<td>speed of the hide animation in milliseconds</td>
-		<td>250</td>
-	</tr>
-	<tr>
-		<td>showSpeed</td>
-		<td>speed of the view animation in milliseconds</td>
-		<td>500</td>
-	</tr>
+  <tr>
+    <th>Option</th>
+    <th>Description</th>
+    <th>Default Value</th>
+  </tr>
+  <tr>
+    <td>maskColor</td>
+    <td>color of the window mask using hexadecimal notation</td>
+    <td>#000000</td>
+  </tr>
+  <tr>
+    <td>hideEasing</td>
+    <td>animation to be used when hiding the lightbox</td>
+    <td>linear</td>
+  </tr>
+  <tr>
+    <td>showEasing</td>
+    <td>animation to be used when viewing the lightbox</td>
+    <td>linear</td>
+  </tr>
+  <tr>
+    <td>hideSpeed</td>
+    <td>speed of the hide animation in milliseconds</td>
+    <td>250</td>
+  </tr>
+  <tr>
+    <td>showSpeed</td>
+    <td>speed of the view animation in milliseconds</td>
+    <td>500</td>
+  </tr>
 </table>
 
 <p>Click <a href="http://jqueryui.com/easing">here</a> for more information about the available <a href="http://jqueryui.com">jQuery UI</a> Easing effects.</p>

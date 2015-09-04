@@ -1,16 +1,16 @@
 module('YALB (Yet Another Lightbox)', {
-	setup : function() {
-		win = $('#qunit-fixture').YALB();
-	},
-	teardown : function() {
-		// do nothing - preserve element structure
-	}
+  setup : function() {
+    win = $('#qunit-fixture').YALB();
+  },
+  teardown : function() {
+    // Do nothing - preserve element structure
+  }
 });
 
 done(function() {
-	$('div.yalb').remove();
+  $('div.yalb').remove();
 });
 
 test('Generate HTML', function() {
-	ok(win, 'Lightbox elements created');
+  ok(win, 'Lightbox elements created');
 });
