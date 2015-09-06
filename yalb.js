@@ -35,9 +35,11 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @returns {Object} jQuery object
      */
     "init": function(options) {
+      var $this = $(this),
+          data  = $this.data();
 
       // Default options
-      var settings = $.extend({
+      var defaults = $.extend({
         maskColor:  '#000000',
         showEasing: 'linear',
         hideEasing: 'linear',
@@ -50,28 +52,25 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
         $('body').height('100%');
       }
 
-      return this.each(function() {
-        var $this = $(this),
-             data  = $this.data();
+      // Remove vertical margins.
+      $('html, body').css({
+        marginBottom: 0,
+        marginTop:    0
+      });
 
-        // Remove vertical margins.
-        $('html, body').css({
-          marginBottom: 0,
-          marginTop:    0
+      if ( $.isEmptyObject(data) ) {
+        var win = $this.YALB('_createWindow', defaults);
+
+        $this.data({
+          modal:   win.children('.modal'),
+          mask:    win.children('.mask'),
+          options: defaults
         });
 
-        if ( $.isEmptyObject(data) ) {
-          var win = createWindow($this, settings);
+        $('body').append(win);
+      }
 
-          $this.data({
-            modal:   win.children('div.modal'),
-            mask:    win.children('div.mask'),
-            options: settings
-          });
-
-          $('body').append(win);
-        }
-      });
+      return $this;
     },
 
     /**
@@ -84,9 +83,7 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * $('#container').YALB('destroy');
      */
     "destroy": function() {
-      return this.each(function() {
-        $(this).removeData();
-      });
+      $(this).removeData();
     },
 
     /**
@@ -101,34 +98,32 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @param {Function} callback
      */
     "show": function(callback) {
-      return this.each(function() {
-        var $this = $(this),
-            data  = $this.data();
+      var $this = $(this),
+          data  = $this.data();
 
-        var attr = { cursor: 'pointer' };
+      var style = { cursor: 'pointer' };
 
-        data.modal
-          .fadeTo(data.options.showSpeed, 1, data.options.showEasing,
-            function() {
-              $(this).css(attr);
+      data.modal
+        .fadeTo(data.options.showSpeed, 1, data.options.showEasing,
+          function() {
+            $(this).css(style);
+          }
+        );
+
+      $this.YALB('_setWindowProps');
+
+      data.mask
+        .fadeTo(data.options.showSpeed, 0.40, data.options.showEasing,
+          function() {
+            $(this).css(style);
+
+            if ( $.isFunction(callback) ) {
+              callback($(this));
             }
-          );
+          }
+        );
 
-        setWindowProps(data.modal);
-
-        data.mask
-          .fadeTo(data.options.showSpeed, 0.40, data.options.showEasing,
-            function() {
-              $(this).css(attr);
-
-              if ( $.isFunction(callback) ) {
-                callback($(this));
-              }
-            }
-          );
-
-        setMaskProps(data.mask);
-      });
+      $this.YALB('_setMaskProps');
     },
 
     /**
@@ -143,33 +138,123 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
      * @param {Function} callback
      */
     "hide": function(callback) {
-      return this.each(function() {
-        var $this = $(this),
-            data  = $this.data();
+      var $this = $(this),
+          data  = $this.data();
 
-        var attr = {
-          cursor:  'auto',
-          display: 'none',
-          zIndex:  0
-        };
+      var style = {
+        cursor:  'auto',
+        display: 'none',
+        zIndex:  0
+      };
 
-        data.modal
-          .fadeTo(data.options.hideSpeed, 0, data.options.hideEasing,
-            function() {
-              $(this).css(attr);
+      data.modal
+        .fadeTo(data.options.hideSpeed, 0, data.options.hideEasing,
+          function() {
+            $(this).css(style);
+          }
+        );
+
+      data.mask
+        .fadeTo(data.options.hideSpeed, 0, data.options.hideEasing,
+          function() {
+            $(this).css(style);
+
+            if ( $.isFunction(callback) ) {
+              callback($(this));
             }
-          );
+          }
+        );
+    },
 
-        data.mask
-          .fadeTo(data.options.hideSpeed, 0, data.options.hideEasing,
-            function() {
-              $(this).css(attr);
+    /**
+     * Create lighbox elements.
+     *
+     * @memberof YALB
+     * @method _createWindow
+     * @private
+     *
+     * @param {Object} options
+     *
+     * @returns {Object} jQuery object
+     */
+    "_createWindow": function(options) {
+      var $this = $(this);
 
-              if ( $.isFunction(callback) ) {
-                callback($(this));
-              }
-            }
-          );
+      var modal
+        = $('<div></div>')
+          .addClass('modal')
+          .css({
+            backgroundColor: 'transparent',
+            display: 'none',
+            height:  $this.outerHeight(),
+            width:   $this.outerWidth(),
+            opacity: 0
+          })
+          .append($this);
+
+      var mask
+        = $('<div></div>')
+          .addClass('mask')
+          .css({
+            backgroundColor: options.maskColor,
+            display: 'none',
+            height:  '100%',
+            width:   '100%',
+            opacity: 0
+          });
+
+      return $('<div></div>')
+        .addClass('yalb')
+        .append(modal, mask);
+    },
+
+    /**
+     * Set window properties based on the browser window size.
+     *
+     * @memberof YALB
+     * @method _createWindow
+     * @private
+     */
+    "_setWindowProps": function() {
+      var $this = $(this),
+          data  = $this.data();
+
+      // Get window position offset center.
+      var posX = getBrowserCenterX() - (data.modal.outerWidth()  / 2),
+          posY = getBrowserCenterY() - (data.modal.outerHeight() / 2);
+
+      data.modal.css({
+        position: 'absolute',
+        left:     (posX > 0) ? posX : 0,
+        top:      (posY > 0) ? posY : 0,
+        zIndex:   150
+      });
+
+      // Update on browser resize event.
+      window.onresize = function() {
+        $this.YALB('_setWindowProps');
+      };
+    },
+
+    /**
+     * Set mask properties based on the browser window size.
+     *
+     * @memberof YALB
+     * @method _createWindow
+     * @private
+     *
+     * @param {Object} node jQuery object
+     */
+    "_setMaskProps": function() {
+      var $this = $(this),
+          data  = $this.data();
+
+      data.mask.css({
+        position: 'absolute',
+        top:      0,
+        left:     0,
+        height:   getDocHeight(),
+        zIndex:   100
       });
     }
   };
@@ -186,86 +271,6 @@ if (!window.jQuery || (window.jQuery && parseInt(window.jQuery.fn.jquery.replace
       $.error('Method ' +  method + ' does not exist in jQuery.YALB');
     }
   };
-
-  /**
-   * Create lighbox elements.
-   *
-   * @protected
-   *
-   * @param Object node jQuery object
-   * @param Object options
-   *
-   * @returns {Object} jQuery object
-   */
-  function createWindow(node, options) {
-    var modal
-      = $('<div></div>')
-        .addClass('modal')
-        .css({
-          backgroundColor: 'transparent',
-          display: 'none',
-          height:  node.outerHeight(),
-          width:   node.outerWidth(),
-          opacity: 0
-        })
-        .append(node);
-
-    var mask
-      = $('<div></div>')
-        .addClass('mask')
-        .css({
-          backgroundColor: options.maskColor,
-          display: 'none',
-          height:  '100%',
-          width:   '100%',
-          opacity: 0
-        });
-
-    return $('<div></div>')
-      .addClass('yalb')
-      .append(modal, mask);
-  }
-
-  /**
-   * Set window properties based on the browser window size.
-   *
-   * @protected
-   *
-   * @param {Object} node jQuery object
-   */
-  function setWindowProps(node) {
-    var posX = getBrowserCenterX() - (node.outerWidth()  / 2),
-        posY = getBrowserCenterY() - (node.outerHeight() / 2);
-
-    node.css({
-      position: 'absolute',
-      left:     (posX > 0) ? posX : 0,
-      top:      (posY > 0) ? posY : 0,
-      zIndex:   150
-    });
-
-    // Update on browser resize event.
-    window.onresize = function() {
-      setWindowProps(node);
-    };
-  }
-
-  /**
-   * Set mask properties based on the browser window size.
-   *
-   * @protected
-   *
-   * @param {Object} node jQuery object
-   */
-  function setMaskProps(node) {
-    node.css({
-      position: 'absolute',
-      top:      0,
-      left:     0,
-      height:   getDocHeight(),
-      zIndex:   100
-    });
-  }
 
   /**
    * Return the web browser inner center X position.
