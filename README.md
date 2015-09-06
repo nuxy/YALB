@@ -2,7 +2,7 @@
 
 A lightweight, dead simple, and extremely flexible lightbox generator.
 
-[<img src="https://nuxy.github.io/YALB/preview.gif" alt="YALB" />](https://nuxy.github.io/YALB)
+[<img src="https://nuxy.github.io/YALB/preview.jpg" alt="YALB" />](https://nuxy.github.io/YALB)
 
 ## Features
 
