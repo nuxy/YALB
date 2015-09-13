@@ -1,6 +1,6 @@
 {
   "name": "yalb",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "homepage": "https://github.com/nuxy/YALB",
   "description": "A lightweight, dead simple, and extremely flexible lightbox generator.",
   "main": "yalb.js",
